@@ -1,0 +1,69 @@
+import CustomTooltip from '@/components/CustomTooltip';
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
+
+const PortfoliosTotalContractsChart = ({
+  data,
+  setSelectedPortfolio,
+  selectedPortfolio,
+}) => {
+  const isSinglePair = data?.length === 1;
+  return (
+    <div className="h-64" dir="ltr">
+      <ResponsiveContainer width="100%" height="100%" minHeight={240}>
+        <BarChart
+          data={data}
+          layout="vertical"
+          margin={{ right: 30, bottom: 20 }}
+        >
+          <CartesianGrid horizontal={false} strokeDasharray="3,3" />
+          <XAxis type="number" tickLine={false} orientation="top" />
+          <YAxis
+            type="category"
+            dataKey="portfolioName"
+            tick={{ fontSize: 12 }}
+            tickLine={false}
+          />
+          <Bar
+            dataKey="contractsCount"
+            fill="#00609D"
+            onClick={(entry) =>
+              setSelectedPortfolio((prev) =>
+                prev === entry.portfolioNumber ? '' : entry.portfolioNumber
+              )
+            }
+            barSize={isSinglePair ? 60 : 40}
+          >
+            {data?.map((entry) => (
+              <Cell
+                key={entry.portfolioNumber}
+                fill="#00609D"
+                opacity={
+                  selectedPortfolio &&
+                  selectedPortfolio !== entry.portfolioNumber
+                    ? 0.3
+                    : 0.8
+                }
+                cursor="pointer"
+              />
+            ))}
+          </Bar>
+          <Tooltip
+            content={<CustomTooltip showKey={false} titleKey="عدد العقود" />}
+            cursor={{ fill: '#00619d', opacity: 0.1 }}
+          />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
+
+export default PortfoliosTotalContractsChart;

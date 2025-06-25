@@ -1,0 +1,104 @@
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import useResetOnUnmount from '@/hooks/useResetOnUnmount';
+import { Eye } from 'lucide-react';
+import { useNavigate } from 'react-router';
+
+const ContractDetailsPaymentsTable = ({ data }) => {
+  useResetOnUnmount(() => console.log('reset pagination'));
+  const navigate = useNavigate();
+  return (
+    <div>
+      <Table dir="rtl" className="border-separate border-spacing-y-3 p-1 pb-0">
+        {/*  */}
+        <TableHeader className="text-sm">
+          <TableRow className="bg-primary-50">
+            <TableHead className="text-center  font-semibold">
+              رقم القسط
+            </TableHead>
+            <TableHead className="text-center  font-semibold">
+              تاريخ القسط
+            </TableHead>
+            <TableHead className="text-center  font-semibold">
+              القسط الشهري
+            </TableHead>
+            <TableHead className="text-center  font-semibold">
+              مبلغ الفائدة
+            </TableHead>
+            <TableHead className="text-center  font-semibold">الأصل</TableHead>
+            <TableHead className="text-center  font-semibold">
+              المتبقي
+            </TableHead>
+            <TableHead className="text-center  font-semibold">
+              حالة القسط
+            </TableHead>
+            <TableHead className="text-center  font-semibold">
+              تاريخ الدفع
+            </TableHead>
+            <TableHead className="text-center  font-semibold">
+              الإجراءات
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell className="text-center border-b border-ivory-200">
+              98767611
+            </TableCell>
+            <TableCell className="text-center border-b border-ivory-200">
+              05/02/2025
+            </TableCell>
+            <TableCell className="text-center border-b border-ivory-200">
+              30,500.00
+            </TableCell>
+            <TableCell className="text-center border-b border-ivory-200">
+              2,500.00
+            </TableCell>
+            <TableCell className="text-center border-b border-ivory-200">
+              50,500.00
+            </TableCell>
+            <TableCell className="text-center border-b border-ivory-200">
+              21,500.00
+            </TableCell>
+            <TableCell className="text-center border-b border-ivory-200">
+              <Badge variant="destructive">غير مدفوع</Badge>
+              <Badge variant="success">مدفوع</Badge>
+              <Badge variant="wait">مدفوع جزئياً</Badge>
+              <Badge variant="neutral">لم يستحق</Badge>
+            </TableCell>
+            <TableCell className="text-center border-b border-ivory-200">
+              05/02/2025
+            </TableCell>
+            <TableCell className="text-center border-b border-ivory-200">
+              <Button
+                variant="ghost"
+                className="p-0 h-fit"
+                onClick={() =>
+                  navigate(`installment/${data?.id || 21104640392701}`, {
+                    relative: 'route',
+                  })
+                }
+              >
+                <Badge
+                  variant="wait"
+                  className="border-none h-8 w-8 flex items-center justify-center rounded-md"
+                >
+                  <Eye className="w-4 h-4 text-extended-500" />
+                </Badge>
+              </Button>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </div>
+  );
+};
+export default ContractDetailsPaymentsTable;
