@@ -10,15 +10,12 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { usePreventCloseModal } from '@/hooks/usePreventCloseModal';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import uploadOnboarding from '../services/uploadOnboarding';
 
 const UploadContractsActions = ({
   setIsExistModalOpen,
   currentStep,
   onChangeSteps,
   uploadedFiles,
-  setUploadedFiles,
 }) => {
   const [isProcessModalOpen, setIsProcessModalOpen] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
@@ -33,33 +30,14 @@ const UploadContractsActions = ({
     uploadedFiles.contractFile &&
     uploadedFiles.paymentScheduleFile;
 
-  const { isPending, mutateAsync } = useMutation({
-    mutationFn: uploadOnboarding,
-  });
-
-  const queryClient = useQueryClient();
-
   const handleSubmit = async () => {
     const formData = new FormData();
     formData.append('ContractFile', uploadedFiles.contractFile);
     formData.append('ScheduleFile', uploadedFiles.paymentScheduleFile);
     formData.append('TransactionFile', uploadedFiles.paymentTransactionFile);
     formData.append('PortfolioNumber', '12345');
-    await mutateAsync(formData, {
-      onSuccess: () => {
-        setIsProcessModalOpen(true);
-        setIsConfirmationModalOpen(false);
-        queryClient.invalidateQueries({
-          queryKey: ['checkIsAllowedToUpload'],
-        });
-        onChangeSteps(1);
-        setUploadedFiles({
-          contractFile: null,
-          paymentScheduleFile: null,
-          paymentTransactionFile: null,
-        });
-      },
-    });
+    setIsProcessModalOpen(true);
+    setIsConfirmationModalOpen(false);
   };
   const preventCloseProps = usePreventCloseModal();
   return (
@@ -97,7 +75,7 @@ const UploadContractsActions = ({
           </Button>
         ) : (
           <Button
-            disabled={!canSubmit || isPending}
+            disabled={!canSubmit}
             onClick={() => {
               uploadedFiles.paymentTransactionFile
                 ? handleSubmit()

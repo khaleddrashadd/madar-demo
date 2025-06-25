@@ -1,4 +1,5 @@
 import Step from './Step';
+import StepForm from './StepForm';
 
 const UploadContractsSteps = ({
   currentStep,
@@ -9,20 +10,23 @@ const UploadContractsSteps = ({
   switch (currentStep) {
     case 1:
       renderSteps = (
-        <Step
-          currentStep={currentStep}
-          title="ملف العقود"
-          onSelectFile={(file) =>
-            setUploadedFiles((prev) => ({
-              ...prev,
-              contractFile: file,
-            }))
-          }
-          onRemoveFile={() =>
-            setUploadedFiles((prev) => ({ ...prev, contractFile: null }))
-          }
-          file={uploadedFiles.contractFile}
-        />
+        <>
+          {!uploadedFiles.contractFile && <StepForm />}
+          <Step
+            currentStep={currentStep}
+            title="ملف العقود"
+            onSelectFile={(file) =>
+              setUploadedFiles((prev) => ({
+                ...prev,
+                contractFile: file,
+              }))
+            }
+            onRemoveFile={() =>
+              setUploadedFiles((prev) => ({ ...prev, contractFile: null }))
+            }
+            file={uploadedFiles.contractFile}
+          />
+        </>
       );
       break;
     case 2:

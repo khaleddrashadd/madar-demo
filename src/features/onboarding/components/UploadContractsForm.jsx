@@ -31,7 +31,7 @@ const UploadContractsForm = ({ currentStep, onChangeSteps }) => {
     <>
       <Card>
         {/* Upload Section */}
-        <CardContent className="bg-white rounded-lg shadow-sm border border-ivory-200 pb-8  h-[442px]">
+        <CardContent className="bg-white rounded-lg shadow-sm border border-ivory-200 pb-8 flex flex-col  min-h-[442px]">
           <UploadContractsSteps
             currentStep={currentStep}
             setUploadedFiles={setUploadedFiles}

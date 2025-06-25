@@ -38,6 +38,7 @@ function App() {
         <Route element={<ProtectRoutes />}>
           <Route element={<MainLayout />}>
             <Route index element={<Home />} />
+            <Route path="add-contracts" element={<UploadContracts />} />
             {/*  */}
             <Route path="/reports">
               <Route path="/reports/contracts" element={<Contracts />} />
