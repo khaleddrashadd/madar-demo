@@ -62,7 +62,7 @@ const IncorrectUploadedContractsTable = ({
                     variant="ghost"
                     className="p-0 h-fit"
                     onClick={() =>
-                      navigate(`/services/uploaded-contracts/${contractNumber}`)
+                      navigate(`/uploaded-contracts/${contractNumber}`)
                     }
                   >
                     <Badge

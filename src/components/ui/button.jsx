@@ -17,7 +17,8 @@ const buttonVariants = cva(
         extended_outline:
           'border border-extended-500 bg-white hover:bg-ivory-100 text-extended-500',
 
-        secondary: 'bg-white border border-ivory-900',
+        secondary:
+          'bg-white border border-ivory-900 bg-secondary-400 text-white',
         ghost:
           'hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50',
         link: 'text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50',

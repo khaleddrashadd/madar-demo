@@ -1,14 +1,23 @@
 /* eslint-disable react/no-unknown-property */
 import { useState } from 'react';
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 import ReportIcon from '../assets/icons/report.svg?react';
 import LogoIcon from '../assets/icons/logo.svg';
 import SidebarNavExpandableItem from './SidebarNavExpandableItem';
-import { ArrowRightToLine, House, FileText, Grid2x2Plus } from 'lucide-react';
+import {
+  ArrowRightToLine,
+  House,
+  FileText,
+  Grid2x2Plus,
+  UploadIcon,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 const SidebarNav = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const handleOpenSidebar = () => setIsSidebarOpen(true);
 
+  const navigate = useNavigate();
   return (
     <div
       className={`relative min-h-screen ${
@@ -28,6 +37,20 @@ const SidebarNav = () => {
               className="max-w-40 w-full object-cover"
             />
           </div>
+          <Button
+            variant="secondary"
+            className={cn(
+              'bg-secondary-100  text-secondary-400 rounded-2xl border-dashed border-secondary-400 border-2',
+              !isSidebarOpen ? 'w-fit' : ''
+            )}
+            onClick={() => navigate('/upload-contracts')}
+          >
+            {isSidebarOpen ? (
+              <span className="text-sm font-semibold"> إسناد المحافظ</span>
+            ) : (
+              <UploadIcon className="w-6 h-6" />
+            )}
+          </Button>
         </div>
         <ul className="flex flex-col gap-[10px] py-3 px-2">
           <li

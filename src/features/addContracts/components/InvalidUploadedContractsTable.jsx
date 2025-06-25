@@ -1,12 +1,13 @@
 import { Button } from '@/components/ui/button';
 import UploadedContractsTable from './UploadedContractsTable';
 import { Badge } from '@/components/ui/badge';
-import { DownloadIcon, Eye } from 'lucide-react';
+import { DownloadIcon, Eye, ListTodo } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/card';
 import Pagination from '@/components/Pagination';
+import { useState } from 'react';
 
-const CorrectUploadedContractsTable = ({
+const ManualUploadedContractsTable = ({
   data,
   onChangePageNumber,
   onChangePageSize,
@@ -17,26 +18,29 @@ const CorrectUploadedContractsTable = ({
   pagination,
 }) => {
   const navigate = useNavigate();
+  const [selectedContracts, setSelectedContracts] = useState([]);
 
   return (
     <Card className="mt-6 h-fit bg-white">
       <CardHeader className="px-4 py-4 bg-white">
         <CardTitle className="text-right font-bold flex items-center justify-between">
-          <div className=" flex items-center gap-4">
-            <h2 className="text-lg font-semibold">العقود المرفوعة</h2>
-            <Button
-              disabled={isFileLoading}
-              onClick={() =>
-                handleExportContracts({
-                  ...filterData,
-                  ...pagination,
-                })
-              }
-              variant="outline"
-              className="border-primary-500 hover:bg-primary-50/50 text-primary-500 px-3"
-            >
-              <DownloadIcon />
-            </Button>
+          <div className="flex items-center justify-between w-full">
+            <div className=" flex items-center gap-4">
+              <h2 className="text-lg font-semibold">العقود الغير صالحة</h2>
+              <Button
+                disabled={isFileLoading}
+                onClick={() =>
+                  handleExportContracts({
+                    ...filterData,
+                    ...pagination,
+                  })
+                }
+                variant="outline"
+                className="border-primary-500 hover:bg-primary-50/50 text-primary-500 px-3"
+              >
+                <DownloadIcon />
+              </Button>
+            </div>
           </div>
         </CardTitle>
       </CardHeader>
@@ -44,16 +48,23 @@ const CorrectUploadedContractsTable = ({
         <div className="w-full px-4">
           <div className="rounded-xl border">
             <UploadedContractsTable
+              selectedContracts={selectedContracts}
+              setSelectedContracts={setSelectedContracts}
               data={data}
               isLoading={isLoading}
               renderActions={(contractNumber) => (
                 <div className="flex items-center gap-3 justify-center">
                   <Button
+                    variant="outline"
+                    className="border-primary-500 hover:bg-primary-50/10 text-primary-500"
+                  >
+                    <ListTodo className="w-4 h-4 text-primary-500" />
+                    تفقد السبب
+                  </Button>
+                  <Button
                     variant="ghost"
                     className="p-0 h-fit"
-                    onClick={() =>
-                      navigate(`/uploaded-contracts/${contractNumber}`)
-                    }
+                    onClick={() => navigate(`/add-contracts/${contractNumber}`)}
                   >
                     <Badge
                       variant="wait"
@@ -62,15 +73,6 @@ const CorrectUploadedContractsTable = ({
                       <Eye className="w-4 h-4 text-extended-500" />
                     </Badge>
                   </Button>
-                  {/* <Button
-                    variant="ghost"
-                    className="p-0 h-fit"
-                    onClick={() => console.log(data)}
-                  >
-                    <Badge className="border-none h-8 w-8 flex items-center justify-center rounded-md">
-                      <Pencil className="w-4 h-4" />
-                    </Badge>
-                  </Button> */}
                 </div>
               )}
             />
@@ -88,4 +90,4 @@ const CorrectUploadedContractsTable = ({
     </Card>
   );
 };
-export default CorrectUploadedContractsTable;
+export default ManualUploadedContractsTable;
