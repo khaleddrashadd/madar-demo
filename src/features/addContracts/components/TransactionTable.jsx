@@ -22,10 +22,7 @@ const TransactionTable = () => {
       <CardContent>
         <div className="w-full px-4">
           <div className="rounded-xl border">
-            <Table
-              dir="rtl"
-              className="border-separate border-spacing-y-3 p-1 pb-0"
-            >
+            <Table dir="rtl" className="border-separate border-spacing-y-3 p-4">
               {/*  */}
               <TableHeader className="text-sm">
                 <TableRow className="bg-primary-50 rounded-xl">
@@ -57,14 +54,6 @@ const TransactionTable = () => {
               </TableBody>
             </Table>
           </div>
-          <Pagination
-            currentPage={1}
-            pageSize={10}
-            totalPages={6}
-            totalItems={600}
-            onPageChange={(page) => console.log(page)}
-            onPageSizeChange={(size) => console.log(size)}
-          />
         </div>
       </CardContent>
     </Card>

@@ -25,7 +25,7 @@ const ContractDataGridTitle = ({
             onClick={handleNextTab}
             variant="outline"
             className="rounded-full text-primary-500 px-2 aspect-square border-primary-500 hover:bg-primary-50/20"
-            disabled={currentTab === 'property'}
+            disabled={currentTab === 'docs'}
           >
             <ChevronLeft className="h-4 w-4 flex-shrink-0" />
           </Button>

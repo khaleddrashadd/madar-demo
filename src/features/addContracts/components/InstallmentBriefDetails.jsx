@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router';
 
 const InstallmentBriefDetails = () => {
-  const { installmentId } = useParams();
+  const { transactionId } = useParams();
 
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const InstallmentBriefDetails = () => {
           </div>
           <div className="flex items-center gap-2 text-2xl text-ivory-950 font-bold">
             قسط رقم
-            <span>#{installmentId}</span>
+            <span>#{transactionId}</span>
           </div>
         </div>
       </div>

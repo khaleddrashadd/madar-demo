@@ -1,24 +1,132 @@
 import { Button } from '@/components/ui/button';
 import ContractDetailsPaymentsTable from './ContractDetailsPaymentsTable';
-import { Funnel, Search } from 'lucide-react';
+import { DownloadIcon, Funnel, Search } from 'lucide-react';
 import ExportExcelButton from '@/components/ExportExcelButton';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
-import { useDebounce } from 'use-debounce';
 
 import FilterContractDetailsPaymentsDialog from './FilterContractDetailsPaymentsDialog';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/card';
 import Pagination from '@/components/Pagination';
-import { useQuery } from '@tanstack/react-query';
-import getPaymentschedules from '../services/getPaymentSchedules';
-import { useParams } from 'react-router';
 import { cn } from '@/lib/utils';
+
+const paymentSchedules = {
+  pagedInstallments: {
+    items: [
+      {
+        installmentNumber: 9876761116,
+        installmentDate: '2026-05-24T00:00:00',
+        monthlyInstallment: 5192.57,
+        interestAmount: 1250.0,
+        principal: 3942.57,
+        remainingBalance: 1250.0,
+        installmentStatus: 'Paid',
+        paymentDate: '2025-06-22T19:41:47',
+      },
+      {
+        installmentNumber: 9876761115,
+        installmentDate: '2026-04-24T00:00:00',
+        monthlyInstallment: 5192.57,
+        interestAmount: 1250.0,
+        principal: 3942.57,
+        remainingBalance: 1250.0,
+        installmentStatus: 'PartiallyPaid',
+        paymentDate: '2025-06-22T19:41:47',
+      },
+      {
+        installmentNumber: 9876761114,
+        installmentDate: '2026-03-24T00:00:00',
+        monthlyInstallment: 5192.57,
+        interestAmount: 1250.0,
+        principal: 3942.57,
+        remainingBalance: 1250.0,
+        installmentStatus: 'PartiallyPaid',
+        paymentDate: '2025-06-22T19:41:47',
+      },
+      {
+        installmentNumber: 9876761113,
+        installmentDate: '2026-02-24T00:00:00',
+        monthlyInstallment: 5192.57,
+        interestAmount: 1250.0,
+        principal: 3942.57,
+        remainingBalance: 1250.0,
+        installmentStatus: 'NotDue',
+        paymentDate: '2025-06-22T19:41:47',
+      },
+      {
+        installmentNumber: 9876761112,
+        installmentDate: '2026-01-24T00:00:00',
+        monthlyInstallment: 5192.57,
+        interestAmount: 1250.0,
+        principal: 3942.57,
+        remainingBalance: 1250.0,
+        installmentStatus: 'Paid',
+        paymentDate: '2025-06-22T19:41:47',
+      },
+      {
+        installmentNumber: 9876761111,
+        installmentDate: '2025-12-24T00:00:00',
+        monthlyInstallment: 5192.57,
+        interestAmount: 1250.0,
+        principal: 3942.57,
+        remainingBalance: 1250.0,
+        installmentStatus: 'Paid',
+        paymentDate: '2025-06-22T19:41:47',
+      },
+      {
+        installmentNumber: 9876761110,
+        installmentDate: '2025-11-24T00:00:00',
+        monthlyInstallment: 5192.57,
+        interestAmount: 1250.0,
+        principal: 3942.57,
+        remainingBalance: 1250.0,
+        installmentStatus: 'NotPaid',
+        paymentDate: '2025-06-22T19:41:47',
+      },
+      {
+        installmentNumber: 987676119,
+        installmentDate: '2025-10-24T00:00:00',
+        monthlyInstallment: 5192.57,
+        interestAmount: 1250.0,
+        principal: 3942.57,
+        remainingBalance: 1250.0,
+        installmentStatus: 'NotDue',
+        paymentDate: '2025-06-22T19:41:47',
+      },
+      {
+        installmentNumber: 987676118,
+        installmentDate: '2025-09-24T00:00:00',
+        monthlyInstallment: 5192.57,
+        interestAmount: 1250.0,
+        principal: 3942.57,
+        remainingBalance: 1250.0,
+        installmentStatus: 'Paid',
+        paymentDate: '2025-06-22T19:41:47',
+      },
+      {
+        installmentNumber: 987676117,
+        installmentDate: '2025-08-24T00:00:00',
+        monthlyInstallment: 5192.57,
+        interestAmount: 1250.0,
+        principal: 3942.57,
+        remainingBalance: 1250.0,
+        installmentStatus: 'PartiallyPaid',
+        paymentDate: '2025-06-22T19:41:47',
+      },
+    ],
+    pageNumber: 1,
+    pageSize: 10,
+    totalCount: 16,
+    totalPages: 2,
+    hasPreviousPage: false,
+    hasNextPage: true,
+  },
+};
 
 const ContractDetailsPaymentsContent = () => {
   const [searchValue, setSearchValue] = useState('');
   const [filterData, setFilterData] = useState({});
-  const deferredSearchValue = useDebounce(searchValue, 1000);
-  console.log(deferredSearchValue);
+  // const deferredSearchValue = useDebounce(searchValue, 1000);
   const [
     isFilterContractDetailsPaymentsDialogOpen,
     setIsFilterContractDetailsPaymentsDialogOpen,
@@ -33,13 +141,6 @@ const ContractDetailsPaymentsContent = () => {
   const isFilterApplied = Object.values(filterData).some(
     (value) => value !== null && value !== undefined && value !== ''
   );
-
-  const { id: contractId } = useParams();
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['contract', 'payments', 'search', deferredSearchValue],
-    queryFn: () => getPaymentschedules(contractId),
-  });
 
   return (
     <Card className="h-fit bg-white">
@@ -84,15 +185,15 @@ const ContractDetailsPaymentsContent = () => {
                 </div>
               </div>
               <div className="flex items-center gap-3 rtl:pr-3 ltr:pl-3">
-                {/* <Button
-              variant="outline"
-              className="border-primary-500 hover:bg-primary-50/50 text-primary-500"
-            >
-              <DownloadIcon className="w-4 h-4" />
-              <span>إستخراج بصيغة REDF</span>
-            </Button> */}
+                <Button
+                  variant="outline"
+                  className="border-primary-500 hover:bg-primary-50/50 text-primary-500 font-semibold"
+                >
+                  <DownloadIcon className="w-4 h-4" />
+                  <span>إستخراج بصيغة REDF</span>
+                </Button>
 
-                <ExportExcelButton className="text-primary-500">
+                <ExportExcelButton className="text-primary-500 font-semibold">
                   إستخراج كملف Excel
                 </ExportExcelButton>
               </div>
@@ -108,7 +209,7 @@ const ContractDetailsPaymentsContent = () => {
       <CardContent>
         <div className="w-full px-4">
           <div className="rounded-xl border">
-            <ContractDetailsPaymentsTable />
+            <ContractDetailsPaymentsTable data={paymentSchedules} />
           </div>
           <Pagination
             currentPage={1}

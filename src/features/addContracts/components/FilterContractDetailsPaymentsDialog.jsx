@@ -11,7 +11,7 @@ import {
 import { Funnel, RefreshCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { filterContractDetailsPaymentsSchema } from '../schema/filterContractDetailsPaymentsSchema';
+import { filterContractDetailsPaymentsSchema } from '../../onboarding/schema/filterContractDetailsPaymentsSchema';
 const FilterContractDetailsPaymentsDialog = ({
   isOpen,
   onOpenChange,
@@ -52,31 +52,6 @@ const FilterContractDetailsPaymentsDialog = ({
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <Label className="text-sm font-semibold text-gray-900">
-            رقم المحفظة
-          </Label>
-          <Controller
-            control={control}
-            name="portfolioNumber"
-            render={({ field }) => (
-              <Select
-                value={field.value}
-                onValueChange={field.onChange}
-                dir="rtl"
-              >
-                <SelectTrigger className="w-full border data-[state=open]:border-primary-500 ">
-                  <SelectValue placeholder="اختر رقم المحفظة" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="11">a</SelectItem>
-                  <SelectItem value="21">b</SelectItem>
-                  <SelectItem value="31">c</SelectItem>
-                </SelectContent>
-              </Select>
-            )}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label className="text-sm font-semibold text-gray-900">
             حالة القسط
           </Label>
           <Controller
@@ -92,9 +67,10 @@ const FilterContractDetailsPaymentsDialog = ({
                   <SelectValue placeholder="اختر حالة القسط" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="11">a</SelectItem>
-                  <SelectItem value="21">b</SelectItem>
-                  <SelectItem value="31">c</SelectItem>
+                  <SelectItem value="11">مدفوع</SelectItem>
+                  <SelectItem value="21">مدفوع جزئيا</SelectItem>
+                  <SelectItem value="31">لم يتم الدفع</SelectItem>
+                  <SelectItem value="31">لم يستحق</SelectItem>
                 </SelectContent>
               </Select>
             )}
@@ -118,9 +94,9 @@ const FilterContractDetailsPaymentsDialog = ({
                     <SelectValue placeholder="اختر السنة" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="11">a</SelectItem>
-                    <SelectItem value="21">b</SelectItem>
-                    <SelectItem value="31">c</SelectItem>
+                    <SelectItem value="11">2025</SelectItem>
+                    <SelectItem value="21">2024</SelectItem>
+                    <SelectItem value="31">2023</SelectItem>
                   </SelectContent>
                 </Select>
               )}
@@ -138,9 +114,9 @@ const FilterContractDetailsPaymentsDialog = ({
                     <SelectValue placeholder="اختر الشهر" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="11">a</SelectItem>
-                    <SelectItem value="21">b</SelectItem>
-                    <SelectItem value="31">c</SelectItem>
+                    <SelectItem value="11">يناير</SelectItem>
+                    <SelectItem value="21">فبراير</SelectItem>
+                    <SelectItem value="31">مارس</SelectItem>
                   </SelectContent>
                 </Select>
               )}
@@ -165,9 +141,9 @@ const FilterContractDetailsPaymentsDialog = ({
                     <SelectValue placeholder="اختر السنة" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="11">a</SelectItem>
-                    <SelectItem value="21">b</SelectItem>
-                    <SelectItem value="31">c</SelectItem>
+                    <SelectItem value="11">2025</SelectItem>
+                    <SelectItem value="21">2024</SelectItem>
+                    <SelectItem value="31">2023</SelectItem>
                   </SelectContent>
                 </Select>
               )}
@@ -185,9 +161,9 @@ const FilterContractDetailsPaymentsDialog = ({
                     <SelectValue placeholder="اختر الشهر" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="11">a</SelectItem>
-                    <SelectItem value="21">b</SelectItem>
-                    <SelectItem value="31">c</SelectItem>
+                    <SelectItem value="11">يناير</SelectItem>
+                    <SelectItem value="21">فبراير</SelectItem>
+                    <SelectItem value="31">مارس</SelectItem>
                   </SelectContent>
                 </Select>
               )}

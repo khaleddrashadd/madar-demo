@@ -22,6 +22,7 @@ import UploadedContracts from './pages/services/UploadedContracts';
 import UploadedContractDetails from './pages/services/UploadedContractDetails';
 import UploadedContractInstallmentDetails from './pages/services/UploadedContractInstallmentDetails';
 import AddContracts from './pages/AddContracts';
+import ContractDetails from './pages/ContractDetails';
 // import TaxInvoices from './pages/invoices-approval/TaxInvoices';
 
 const queryClient = new QueryClient({
@@ -40,7 +41,14 @@ function App() {
           <Route element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path="upload-contracts" element={<UploadContracts />} />
-            <Route path="add-contracts" element={<AddContracts />} />
+            <Route path="add-contracts">
+              <Route index element={<AddContracts />} />
+              <Route path=":contractId" element={<ContractDetails />} />
+              <Route
+                path=":contractId/installment/:transactionId"
+                element={<UploadedContractInstallmentDetails />}
+              />
+            </Route>
             {/*  */}
             <Route path="/reports">
               <Route path="/reports/contracts" element={<Contracts />} />
@@ -61,7 +69,7 @@ function App() {
                 element={<UploadedContractDetails />}
               ></Route>
               <Route
-                path="uploaded-contracts/:id/installment/:installmentId"
+                path="uploaded-contracts/:id/installment/:transactionId"
                 element={<UploadedContractInstallmentDetails />}
               />
             </Route>

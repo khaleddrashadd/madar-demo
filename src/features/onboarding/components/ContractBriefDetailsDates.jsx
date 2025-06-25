@@ -8,7 +8,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { formatDate } from '@/lib/utils';
-import { ArrowRight, EllipsisVertical, Trash2 } from 'lucide-react';
+import {
+  ArrowRight,
+  Check,
+  EllipsisVertical,
+  Printer,
+  Trash2,
+} from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { CONTRACTS_STATUS, BUCKET_STATUS } from '../constants/contractsStatus';
@@ -47,12 +53,19 @@ const ContractBriefDetailsDates = ({ data }) => {
         </div>
       </div>
       <div className="flex items-center gap-4">
+        <Button
+          variant="outline"
+          className="border-secondary-400 text-secondary-400 hover:bg-secondary-50/20"
+        >
+          <Check />
+          <span>تحقق</span>
+        </Button>
         {/* <Button
           variant="outline"
           className="border-primary-500 text-primary-500 hover:bg-primary-50/20"
         >
-          <PencilLine />
-          <span>تعديل</span>
+          <ListTodo />
+          <span>تفقد السبب</span>
         </Button> */}
         {/* <Button
           variant="outline"
@@ -76,13 +89,13 @@ const ContractBriefDetailsDates = ({ data }) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-36">
-            {/* <DropdownMenuItem
+            <DropdownMenuItem
               className="flex items-center gap-2 text-right"
               onClick={() => console.log('Print')}
             >
               <Printer className="h-4 w-4" />
               <span>طباعة</span>
-            </DropdownMenuItem> */}
+            </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
                 setIsDeleteDialogOpen(true);

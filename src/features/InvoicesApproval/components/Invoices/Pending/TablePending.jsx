@@ -68,10 +68,7 @@ const TablePending = ({
     <>
       <Card className={cn(`w-full shadow-custom ${classNames}`)}>
         <div className={`rounded-lg p-2 pb-0 `}>
-          <Table
-            dir="rtl"
-            className="border-separate border-spacing-y-3 p-1 pb-0"
-          >
+          <Table dir="rtl" className="border-separate border-spacing-y-3 p-4">
             {/*  */}
             <TableHeader className="text-sm">
               <TableRow className="bg-primary-50">

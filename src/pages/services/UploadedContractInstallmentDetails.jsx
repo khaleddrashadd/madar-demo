@@ -1,5 +1,5 @@
-import TransactionTable from '@/features/onboarding/components/TransactionTable';
-import InstallmentBriefDetails from './InstallmentBriefDetails';
+import TransactionTable from '@/features/addContracts/components/TransactionTable';
+import InstallmentBriefDetails from '../../features/addContracts/components/InstallmentBriefDetails';
 const UploadedContractInstallmentDetails = () => {
   return (
     <div className="p-4 mt-2">

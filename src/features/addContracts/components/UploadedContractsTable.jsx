@@ -21,7 +21,7 @@ const UploadedContractsTable = ({
 }) => {
   return (
     <div>
-      <Table dir="rtl" className="border-separate border-spacing-y-0 py-1 pb-0">
+      <Table dir="rtl" className="border-separate border-spacing-y-0 p-4">
         {/*  */}
         <TableHeader className="text-sm">
           <TableRow className="bg-primary-50">

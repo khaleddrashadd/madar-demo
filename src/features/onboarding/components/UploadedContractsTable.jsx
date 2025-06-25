@@ -22,7 +22,7 @@ const UploadedContractsTable = ({ renderActions, data, isLoading }) => {
 
   return (
     <div>
-      <Table dir="rtl" className="border-separate border-spacing-y-3 p-1 pb-0">
+      <Table dir="rtl" className="border-separate border-spacing-y-3 p-4">
         {/*  */}
         <TableHeader className="text-sm">
           <TableRow className="bg-primary-50">
