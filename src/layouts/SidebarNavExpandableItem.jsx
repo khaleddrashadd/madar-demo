@@ -1,6 +1,7 @@
 import { NavLink, useLocation } from 'react-router';
 import { useState } from 'react';
 import { ChevronDownIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const SidebarNavExpandableItem = ({
   isSidebarOpen,
@@ -63,7 +64,10 @@ const SidebarNavExpandableItem = ({
                 className={({ isActive }) =>
                   isActive
                     ? 'text-secondary-200 px-6 py-[10px] duration-300 text-xs select-none'
-                    : 'px-6 py-[10px] duration-300 hover:text-secondary-200 text-xs select-none'
+                    : cn(
+                        'px-6 py-[10px] duration-300 hover:text-secondary-200 text-xs select-none',
+                        route?.className
+                      )
                 }
               >
                 {route?.title}

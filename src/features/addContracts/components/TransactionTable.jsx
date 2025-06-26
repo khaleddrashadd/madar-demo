@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/card';
-import Pagination from '@/components/Pagination';
 import {
   Table,
   TableBody,

@@ -23,6 +23,8 @@ import UploadedContractDetails from './pages/services/UploadedContractDetails';
 import UploadedContractInstallmentDetails from './pages/services/UploadedContractInstallmentDetails';
 import AddContracts from './pages/AddContracts';
 import ContractDetails from './pages/ContractDetails';
+import ActiveContracts from './pages/ActiveContracts';
+import ClosedContracts from './pages/ClosedContracts';
 // import TaxInvoices from './pages/invoices-approval/TaxInvoices';
 
 const queryClient = new QueryClient({
@@ -49,6 +51,9 @@ function App() {
                 element={<UploadedContractInstallmentDetails />}
               />
             </Route>
+            <Route path="/active-contracts" element={<ActiveContracts />} />
+            <Route path="/closed-contracts" element={<ClosedContracts />} />
+
             {/*  */}
             <Route path="/reports">
               <Route path="/reports/contracts" element={<Contracts />} />
