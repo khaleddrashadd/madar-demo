@@ -1,10 +1,5 @@
-import bucketFilterReducer from '@/features/contracts/store/contractSlice';
 import loginReducer from '@/features/login/store/loginSlice';
 import filterReducer from '@/features/portfolioPerformance/store/filterSlice';
-import paymentReducer from '@/features/installments/store/paymentsSlice';
-import invoicesApprovalReducer from '@/features/InvoicesApproval/store/invoicesApprovalSlice';
-import redfDetailedInvoiceReducer from '@/features/InvoicesApproval/store/redfDetailedInvoiceSlice';
-import srcDetailedInvoiceReducer from '@/features/InvoicesApproval/store/srcDetailedInvoiceSlice';
 
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import prevailageReducer from '@/layouts/store/prevailageSlice';
@@ -30,12 +25,9 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   filter: filterReducer,
-  bucketFilter: bucketFilterReducer,
+
   loginState: loginReducer,
-  paymentState: paymentReducer,
-  invoiceApproval: invoicesApprovalReducer,
-  redfDetailedInvoice: redfDetailedInvoiceReducer,
-  srcDetailedInvoice: srcDetailedInvoiceReducer,
+
   prevailage: prevailageReducer,
 });
 
