@@ -1,37 +1,16 @@
 import { useState } from 'react';
 
-import redfLogo from '../assets/images/redf-logo.jpeg';
-import srcLogo from '../assets/images/src-logo.jpg';
-import userPlaceholder from '@/assets/images/user-placeholder.png';
 import LogoutModal from '@/features/login/LogoutModal';
 import { Bell, ChevronDownIcon, CircleArrowOutDownLeft } from 'lucide-react';
 import HeaderAdminMenu from './HeaderAdminMenu';
 import { useSelector } from 'react-redux';
 import { getAdminLegalOwner } from './store/prevailageSlice';
+import personPlaceholder from '@/assets/images/person-placeholder.png';
 
 const Header = () => {
   const [isLogoutModalVisible, setIsLogoutModalVisible] = useState(false);
   const adminContext = useSelector(getAdminLegalOwner);
   const [isHeaderMenuVisible, setIsHeaderMenuVisible] = useState(false);
-  const legalOwnerRole = localStorage.getItem('legalOwner');
-  const title = {
-    SRC: 'SRC',
-    REDF: 'REDF',
-    'Super-Admin': `مسئول عام - ${adminContext}`,
-  };
-
-  let legalOwnerPhoto;
-
-  switch (adminContext) {
-    case 'SRC':
-      legalOwnerPhoto = srcLogo;
-      break;
-    case 'REDF':
-      legalOwnerPhoto = redfLogo;
-      break;
-    default:
-      legalOwnerPhoto = userPlaceholder;
-  }
 
   const handleToggleHeaderMenu = () => setIsHeaderMenuVisible((prev) => !prev);
 
@@ -41,7 +20,7 @@ const Header = () => {
         <div className="flex items-center gap-x-1">
           <div className="rounded-full border border-secondary-50">
             <img
-              src={legalOwnerPhoto}
+              src={personPlaceholder}
               alt="user photo"
               className="text-2xs object-cover w-10 h-10 rounded-full"
             />
@@ -50,7 +29,7 @@ const Header = () => {
             <span className="text-2xs text-ivory-900">مرحباً</span>
             {!!adminContext && (
               <h4 className="font-semibold text-sm text-ivory-950">
-                {title[legalOwnerRole]}
+                عمار السيد
               </h4>
             )}
           </div>
