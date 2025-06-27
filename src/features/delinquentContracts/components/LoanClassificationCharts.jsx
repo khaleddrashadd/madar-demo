@@ -13,4 +13,5 @@ const LoanClassificationCharts = () => {
     </div>
   );
 };
+
 export default LoanClassificationCharts;

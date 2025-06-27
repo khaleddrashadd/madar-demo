@@ -6,6 +6,8 @@ function ContractDataGridRow({
   preIcon,
   postIcon,
   labelClassName,
+  iconClassName = '',
+  valueClassName = '',
 }) {
   return (
     <div className="flex justify-between">
@@ -19,8 +21,8 @@ function ContractDataGridRow({
       </span>
       <div className="flex items-center gap-[6px] flex-1 p-4 border-b border-ivory-200 text-ivory-950 font-semibold text-sm">
         {!!preIcon && <span>{preIcon}</span>}
-        <div className="w-full">{value}</div>
-        {!!postIcon && <span>{postIcon}</span>}
+        <div className={cn('w-full', valueClassName)}>{value}</div>
+        {!!postIcon && <span className={iconClassName}>{postIcon}</span>}
       </div>
     </div>
   );

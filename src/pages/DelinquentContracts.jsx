@@ -4,9 +4,15 @@ import DelinquentMainOverView from '@/features/delinquentContracts/components/De
 import { useState } from 'react';
 import DelinquentMainCharts from '../features/delinquentContracts/components/DelinquentMainCharts';
 import LoanClassificationCharts from '@/features/delinquentContracts/components/LoanClassificationCharts';
+import DelinquentCollectionOverView from '@/features/delinquentContracts/components/DelinquentCollectionOverView';
+import DelinquentCollectionCharts from '@/features/delinquentContracts/components/DelinquentCollectionCharts';
+import DelinquentLoansTable from '@/features/delinquentContracts/components/DelinquentLoansTable';
 
 const DelinquentContracts = () => {
   const [filterData, setFilterData] = useState({});
+  console.log(filterData);
+  const [selectedPortfolio, setSelectedPortfolio] = useState('');
+
   return (
     <div className="p-4 mt-2">
       <Tabs defaultValue="main" className="w-full" dir="rtl">
@@ -44,7 +50,7 @@ const DelinquentContracts = () => {
           />
           <div className="mt-4">
             <h2 className="text-xl font-bold">نظرة عامة</h2>
-            <div className="mx-4">
+            <div className="my-4">
               <DelinquentMainOverView />
             </div>
             <DelinquentMainCharts />
@@ -67,26 +73,18 @@ const DelinquentContracts = () => {
           />
           <div className="mt-4">
             <h2 className="text-xl font-bold">نظرة عامة</h2>
-            {/* <IncorrectUploadedContractsTable
-              isFileLoading={isExportInvalidContractsFileLoading}
-              handleExportContracts={exportInvalidContractFile}
-              isLoading={isUploadedInvalidContractsLoading}
-              data={uploadedInvalidContracts}
-              filterData={uploadedInvalidFilterData}
-              pagination={uploadedInvalidContractsPagination}
-              onChangePageNumber={(number) =>
-                setUploadedInvalidContractsPagination((prev) => ({
-                  ...prev,
-                  pageNumber: number,
-                }))
-              }
-              onChangePageSize={(size) =>
-                setUploadedInvalidContractsPagination((prev) => ({
-                  ...prev,
-                  pageSize: size,
-                }))
-              }
-            /> */}
+            <div className="my-4">
+              <DelinquentCollectionOverView
+                selectedPortfolio={selectedPortfolio}
+              />
+            </div>
+            <DelinquentCollectionCharts
+              selectedPortfolio={selectedPortfolio}
+              setSelectedPortfolio={setSelectedPortfolio}
+            />
+          </div>
+          <div className="mt-4">
+            <DelinquentLoansTable />
           </div>
         </TabsContent>
       </Tabs>

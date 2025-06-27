@@ -26,6 +26,7 @@ import ContractDetails from './pages/ContractDetails';
 import ActiveContracts from './pages/ActiveContracts';
 import ClosedContracts from './pages/ClosedContracts';
 import DelinquentContracts from './pages/DelinquentContracts';
+import DelinquentContractDetails from './pages/DelinquentContractDetails';
 // import TaxInvoices from './pages/invoices-approval/TaxInvoices';
 
 const queryClient = new QueryClient({
@@ -58,6 +59,10 @@ function App() {
               <Route
                 path="delinquent-contracts"
                 element={<DelinquentContracts />}
+              />
+              <Route
+                path="delinquent-contracts/:id"
+                element={<DelinquentContractDetails />}
               />
             </Route>
 
