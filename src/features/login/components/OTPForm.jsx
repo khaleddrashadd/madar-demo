@@ -44,11 +44,10 @@ const OTPForm = ({ setStep }) => {
 
   const username = useSelector(getUsername);
   const dispatch = useDispatch();
+
   const onCheckOtp = async (data) => {
-    return await otpService({
-      ...data,
-      username,
-    });
+    localStorage.setItem('token', 'abc');
+    navigate('/');
   };
 
   const {
@@ -57,31 +56,31 @@ const OTPForm = ({ setStep }) => {
     mutate,
   } = useMutation({
     mutationFn: onCheckOtp,
-    onSuccess({ data }) {
-      dispatch(setIsFirstLogin(data.data.initailLogin));
-      dispatch(setHasConsent(data.data.consentTerms));
-      if (data.data.initailLogin) {
-        setStep(STEPS.CHANGE_PASSWORD);
-        return;
-      }
-      if (data.data.consentTerms) {
-        localStorage.setItem('token', data.data.token);
-        localStorage.setItem(
-          'legalOwner',
-          data.data?.roles?.[0]?.replace('Admin-', '')
-        );
+    // onSuccess({ data }) {
+    //   dispatch(setIsFirstLogin(data.data.initailLogin));
+    //   dispatch(setHasConsent(data.data.consentTerms));
+    //   if (data.data.initailLogin) {
+    //     setStep(STEPS.CHANGE_PASSWORD);
+    //     return;
+    //   }
+    //   if (data.data.consentTerms) {
+    //     localStorage.setItem('token', data.data.token);
+    //     localStorage.setItem(
+    //       'legalOwner',
+    //       data.data?.roles?.[0]?.replace('Admin-', '')
+    //     );
 
-        dispatch(
-          changeSuperAdminContext(
-            ADMINS[data.data?.roles?.[0]?.replace('Admin-', '')]
-          )
-        );
-        return navigate(from, {
-          replace: true,
-        });
-      }
-      setHasSentOtp(true);
-    },
+    //     dispatch(
+    //       changeSuperAdminContext(
+    //         ADMINS[data.data?.roles?.[0]?.replace('Admin-', '')]
+    //       )
+    //     );
+    //     return navigate(from, {
+    //       replace: true,
+    //     });
+    //   }
+    //   setHasSentOtp(true);
+    // },
   });
 
   const onSubmit = (data) => mutate(data);

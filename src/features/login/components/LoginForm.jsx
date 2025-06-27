@@ -10,7 +10,6 @@ import logo from '@/assets/images/logo.png';
 import { STEPS } from '@/constants/steps';
 import { useDispatch } from 'react-redux';
 import { setPhoneNumber, setUsername } from '../store/loginSlice';
-import { loginService } from '../services/loginService';
 import loginSchema from '../schema/loginSchema';
 import { FALLBACK_ERR_MSG } from '@/constants/fallbacks';
 
@@ -26,8 +25,8 @@ const LoginForm = ({ setStep }) => {
     resolver: yupResolver(loginSchema),
   });
 
-  const onLogin = async (data) => {
-    return await loginService(data);
+  const onLogin = async () => {
+    setStep(STEPS.OTP);
   };
 
   const {
@@ -39,7 +38,6 @@ const LoginForm = ({ setStep }) => {
     onSuccess({ data }, variables) {
       dispatch(setUsername(variables.username));
       dispatch(setPhoneNumber(data.data));
-      setStep(STEPS.OTP);
     },
   });
   const onSubmit = (data) => mutate(data);
