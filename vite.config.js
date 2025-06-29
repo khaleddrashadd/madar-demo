@@ -2,8 +2,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import path from 'path';
-// import { visualizer } from 'rollup-plugin-visualizer';
-import fg from 'fast-glob';
 
 const ReactCompilerConfig = {};
 
@@ -78,8 +76,8 @@ export default defineConfig({
           state: ['redux', 'redux-persist', '@reduxjs/toolkit'],
 
           'feature-dashboard': ['./src/pages/Home.jsx'],
-          'feature-contracts': ['./src/pages/Contracts.jsx'],
-          'feature-invoices': fg.sync('./src/pages/invoices-approval/**/*.jsx'),
+          // 'feature-contracts': ['./src/pages/Contracts.jsx'],
+          // 'feature-invoices': fg.sync('./src/pages/invoices-approval/**/*.jsx'),
         },
       },
     },
