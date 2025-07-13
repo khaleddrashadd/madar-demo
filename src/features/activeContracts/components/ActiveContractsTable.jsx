@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Eye, SaudiRiyal } from 'lucide-react';
-import { useNavigate } from 'react-router';
 import { Card, CardContent } from '@/components/card';
 import Pagination from '@/components/Pagination';
 import {
@@ -14,6 +13,7 @@ import {
 } from '@/components/ui/table';
 import { formatDate } from '@/lib/utils';
 import { numberSeparator } from '@/utils/numberSeparator';
+import { useNavigate } from '@tanstack/react-router';
 
 const CONTRACTS_STATUS = {
   Current: {
@@ -308,7 +308,9 @@ const ActiveContractsTable = ({ selectedContractType }) => {
                         <Button
                           variant="ghost"
                           className="p-0 h-fit"
-                          onClick={() => navigate(`/add-contracts/${5}`)}
+                          onClick={() =>
+                            navigate({ to: `/add-contracts/${5}` })
+                          }
                         >
                           <Badge
                             variant="wait"

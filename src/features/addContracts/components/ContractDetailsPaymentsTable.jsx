@@ -10,8 +10,8 @@ import {
 } from '@/components/ui/table';
 import { formatDate } from '@/lib/utils';
 import { numberSeparator } from '@/utils/numberSeparator';
+import { useNavigate } from '@tanstack/react-router';
 import { Eye, SaudiRiyal } from 'lucide-react';
-import { useNavigate } from 'react-router';
 
 const INSTALLMENT_STATUS = {
   Paid: {
@@ -125,8 +125,8 @@ const ContractDetailsPaymentsTable = ({ data }) => {
                   variant="ghost"
                   className="p-0 h-fit"
                   onClick={() =>
-                    navigate(`installment/${data?.id || 21104640392701}`, {
-                      relative: 'route',
+                    navigate({
+                      to: `/installment/${data?.id || 21104640392701}`,
                     })
                   }
                 >

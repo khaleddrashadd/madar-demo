@@ -8,15 +8,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { useNavigate } from '@tanstack/react-router';
 import { CircleArrowOutDownLeft } from 'lucide-react';
-import { useNavigate } from 'react-router';
 
 const LogoutModal = ({ isVisible, onClose }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate('/login', { replace: true });
+    navigate({ to: '/login', replace: true });
     onClose(false); // Close the modal
   };
 

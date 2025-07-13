@@ -1,9 +1,7 @@
-import useAxiosConfiguration from '@/hooks/useAxiosConfiguration';
-import { Outlet } from 'react-router';
+import { Outlet } from '@tanstack/react-router';
 
 const ProtectRoutes = () => {
   // const location = useLocation();
-  useAxiosConfiguration();
 
   // const prevailage = useSelector(getAdminLegalOwner);
   // const token = localStorage.getItem('token');

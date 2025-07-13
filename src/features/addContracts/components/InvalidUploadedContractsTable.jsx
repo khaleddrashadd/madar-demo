@@ -2,10 +2,10 @@ import { Button } from '@/components/ui/button';
 import UploadedContractsTable from './UploadedContractsTable';
 import { Badge } from '@/components/ui/badge';
 import { DownloadIcon, Eye, ListTodo } from 'lucide-react';
-import { useNavigate } from 'react-router';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/card';
 import Pagination from '@/components/Pagination';
 import { useState } from 'react';
+import { useNavigate } from '@tanstack/react-router';
 
 const ManualUploadedContractsTable = ({
   data,
@@ -64,7 +64,9 @@ const ManualUploadedContractsTable = ({
                   <Button
                     variant="ghost"
                     className="p-0 h-fit"
-                    onClick={() => navigate(`/add-contracts/${contractNumber}`)}
+                    onClick={() =>
+                      navigate({ to: `/add-contracts/${contractNumber}` })
+                    }
                   >
                     <Badge
                       variant="wait"

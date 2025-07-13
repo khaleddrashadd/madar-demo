@@ -16,8 +16,8 @@ import {
   Trash2,
 } from 'lucide-react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
 import { CONTRACTS_STATUS, BUCKET_STATUS } from '../constants/contractsStatus';
+import { useNavigate } from '@tanstack/react-router';
 
 const ContractBriefDetailsDates = ({ data }) => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -26,7 +26,7 @@ const ContractBriefDetailsDates = ({ data }) => {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <div className="cursor-pointer" onClick={() => navigate(-1)}>
+        <div className="cursor-pointer" onClick={() => navigate({ to: '..' })}>
           <ArrowRight className="font-bold h-6 w-6" />
         </div>
         <div className="flex flex-col gap-3">

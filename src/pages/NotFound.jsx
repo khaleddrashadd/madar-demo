@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { NavLink } from 'react-router';
+import { Link } from '@tanstack/react-router';
 
 const NotFound = () => {
   return (
@@ -11,9 +11,9 @@ const NotFound = () => {
       <p className="text-gray-500 mb-8 text-sm">
         عذراً، الصفحة التي تبحث عنها غير موجودة أو تم نقلها إلى مكان آخر
       </p>
-      <NavLink to="/">
+      <Link to="/">
         <Button>العودة إلى الصفحة الرئيسية</Button>
-      </NavLink>
+      </Link>
     </div>
   );
 };

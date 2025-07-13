@@ -6,7 +6,7 @@ import DefaultDialog from '@/components/partials/dialogs/DeafultDialog';
 import UploadContractsSteps from './UploadContractsSteps';
 import UploadContractsActions from './UploadContractsActions';
 import { usePreventCloseModal } from '@/hooks/usePreventCloseModal';
-import { useNavigate } from 'react-router';
+import { useNavigate } from '@tanstack/react-router';
 
 const initialUploadedFiles = {
   contractFile: null,
@@ -23,7 +23,7 @@ const UploadContractsForm = ({ currentStep, onChangeSteps }) => {
     setIsExistModalOpen(false);
     setUploadedFiles(initialUploadedFiles);
     onChangeSteps(1);
-    navigate('/'); // Redirect to the home
+    navigate({ to: '/' }); // Redirect to the home
   };
   const preventCloseProps = usePreventCloseModal();
 

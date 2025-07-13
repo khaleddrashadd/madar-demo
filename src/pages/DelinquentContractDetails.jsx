@@ -3,15 +3,15 @@ import BeneficiaryNotes from '@/features/delinquentContracts/components/Benefici
 import BeneficiaryPerformanceChart from '@/features/delinquentContracts/components/BeneficiaryPerformanceChart';
 import ComplaintsTable from '@/features/delinquentContracts/components/ComplaintsTable';
 import ContractDetails from '@/features/delinquentContracts/components/ContractDetails';
+import { useNavigate } from '@tanstack/react-router';
 import { ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router';
 
 const DelinquentContractDetails = () => {
   const navigate = useNavigate();
   return (
     <div className="px-6">
       <div className="p-6 flex items-start gap-2 text-4xl bg-white rounded-md mt-2">
-        <div className="cursor-pointer" onClick={() => navigate(-1)}>
+        <div className="cursor-pointer" onClick={() => navigate({ to: '..' })}>
           <ArrowRight className="w-10 h-10" />
         </div>
         <h2>عبد الله مسعود علي</h2>

@@ -1,8 +1,8 @@
-import { Outlet } from 'react-router';
 import SidebarNav from './SidebarNav';
 import Header from './Header';
 import Footer from '../components/Footer';
 import { Toaster } from '@/components/ui/sonner';
+import { Outlet } from '@tanstack/react-router';
 
 const MainLayout = () => {
   return (

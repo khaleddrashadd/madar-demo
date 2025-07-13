@@ -2,12 +2,16 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import path from 'path';
-
+import { tanstackRouter } from '@tanstack/router-plugin/vite';
 const ReactCompilerConfig = {};
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
+    tanstackRouter({
+      target: 'react',
+      autoCodeSplitting: true,
+    }),
     react({
       babel: {
         plugins: [['babel-plugin-react-compiler', ReactCompilerConfig]],
@@ -46,7 +50,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           // Split React and related libraries
-          'react-vendor': ['react', 'react-dom', 'react-router'],
+          'react-vendor': ['react', 'react-dom'],
 
           // Split charting libraries (I can see recharts in your bundle)
           charts: ['recharts'],
@@ -74,10 +78,6 @@ export default defineConfig({
             // Add any other Radix UI components you're using
           ],
           state: ['redux', 'redux-persist', '@reduxjs/toolkit'],
-
-          'feature-dashboard': ['./src/pages/Home.jsx'],
-          // 'feature-contracts': ['./src/pages/Contracts.jsx'],
-          // 'feature-invoices': fg.sync('./src/pages/invoices-approval/**/*.jsx'),
         },
       },
     },

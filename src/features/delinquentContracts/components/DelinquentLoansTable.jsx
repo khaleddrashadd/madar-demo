@@ -10,8 +10,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { useNavigate } from '@tanstack/react-router';
 import { Eye, SaudiRiyal } from 'lucide-react';
-import { useNavigate } from 'react-router';
 
 const data = {
   items: [
@@ -240,9 +240,9 @@ const DelinquentLoansTable = () => {
                           variant="ghost"
                           className="p-0 h-fit"
                           onClick={() =>
-                            navigate(
-                              `/collections/delinquent-contracts/${item.id}`
-                            )
+                            navigate({
+                              to: `/collections/delinquent-contracts/${item.id}`,
+                            })
                           }
                         >
                           <Badge

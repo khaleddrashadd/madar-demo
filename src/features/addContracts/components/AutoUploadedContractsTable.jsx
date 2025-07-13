@@ -9,10 +9,10 @@ import {
   Pencil,
   ShieldCheck,
 } from 'lucide-react';
-import { useNavigate } from 'react-router';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/card';
 import Pagination from '@/components/Pagination';
 import { useState } from 'react';
+import { useNavigate } from '@tanstack/react-router';
 
 const ManualUploadedContractsTable = ({
   data,
@@ -28,15 +28,15 @@ const ManualUploadedContractsTable = ({
   const [selectedContracts, setSelectedContracts] = useState([]);
 
   const selectedContractsObj = data?.items?.filter((contract) =>
-    selectedContracts.includes(contract.contractNumber)
+    selectedContracts.includes(contract.contractNumber),
   );
 
   const hasVerifiedContracts = selectedContractsObj?.some(
-    (contract) => contract.contractStatusId === 'Verified'
+    (contract) => contract.contractStatusId === 'Verified',
   );
 
   const hasPendingVerificationContracts = selectedContractsObj?.some(
-    (contract) => contract.contractStatusId === 'PendingVerification'
+    (contract) => contract.contractStatusId === 'PendingVerification',
   );
 
   return (
@@ -114,7 +114,9 @@ const ManualUploadedContractsTable = ({
                   <Button
                     variant="ghost"
                     className="p-0 h-fit"
-                    onClick={() => navigate(`/add-contracts/${contractNumber}`)}
+                    onClick={() =>
+                      navigate({ to: `/add-contracts/${contractNumber}` })
+                    }
                   >
                     <Badge
                       variant="wait"

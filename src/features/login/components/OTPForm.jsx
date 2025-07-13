@@ -22,17 +22,17 @@ import TermsModal from './TermsModal';
 import { useState } from 'react';
 import OTP from './OTP';
 import { consentTermsService } from '../services/consentTermsService';
-import { useLocation, useNavigate } from 'react-router';
 import { FALLBACK_ERR_MSG } from '@/constants/fallbacks';
 import { ADMINS } from '@/constants/globalConstants';
 import { changeSuperAdminContext } from '@/layouts/store/prevailageSlice';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 
 const OTPForm = ({ setStep }) => {
   const phoneNumber = useSelector(getPhoneNumber);
   const [hasSentOtp, setHasSentOtp] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from || '/';
+  const search = useSearch();
+  const from = search?.from || '/';
 
   const {
     control,
@@ -47,7 +47,7 @@ const OTPForm = ({ setStep }) => {
 
   const onCheckOtp = async (data) => {
     localStorage.setItem('token', 'abc');
-    navigate('/');
+    navigate({ to: '/' });
   };
 
   const {
@@ -95,18 +95,16 @@ const OTPForm = ({ setStep }) => {
       localStorage.setItem('token', data.data.token);
       localStorage.setItem(
         'legalOwner',
-        data.data?.roles?.[0]?.replace('Admin-', '')
+        data.data?.roles?.[0]?.replace('Admin-', ''),
       );
 
       dispatch(
         changeSuperAdminContext(
-          ADMINS[data.data?.roles?.[0]?.replace('Admin-', '')]
-        )
+          ADMINS[data.data?.roles?.[0]?.replace('Admin-', '')],
+        ),
       );
       dispatch(closeModal());
-      navigate('/', {
-        replace: true,
-      });
+      navigate({ to: '/', replace: true });
     },
   });
 

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router';
 import LogoIcon from '../assets/icons/logo.svg';
 import SidebarNavExpandableItem from './SidebarNavExpandableItem';
 import {
@@ -14,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { Link, useNavigate } from '@tanstack/react-router';
 const SidebarNav = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const handleOpenSidebar = () => setIsSidebarOpen(true);
@@ -43,9 +43,9 @@ const SidebarNav = () => {
               variant="secondary"
               className={cn(
                 'w-full bg-secondary-100  text-secondary-400 rounded-2xl border-dashed border-secondary-400 border-2',
-                !isSidebarOpen ? 'w-fit' : ''
+                !isSidebarOpen ? 'w-fit' : '',
               )}
-              onClick={() => navigate('/upload-contracts')}
+              onClick={() => navigate({ to: '/upload-contracts' })}
             >
               {isSidebarOpen ? (
                 <span className="text-sm font-semibold"> إسناد المحافظ</span>
@@ -61,32 +61,32 @@ const SidebarNav = () => {
               !isSidebarOpen ? 'justify-center w-max' : ''
             }`}
           >
-            <NavLink
+            <Link
               to="/"
-              className={({ isActive }) =>
-                isActive
-                  ? 'bg-secondary-400 flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2'
-                  : 'flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2'
-              }
+              className="flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2"
+              activeProps={{
+                className:
+                  'bg-secondary-400 flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2',
+              }}
             >
               <House className="w-6 h-6 text-white" />
               {isSidebarOpen && (
                 <span className="text-sm font-semibold">الرئيسية</span>
               )}
-            </NavLink>
+            </Link>
           </li>
           <li
             className={`flex items-center duration-300 hover:bg-secondary-400 hover:text-white rounded-2xl ${
               !isSidebarOpen ? 'justify-center w-max' : ''
             }`}
           >
-            <NavLink
+            <Link
               to="/add-contracts"
-              className={({ isActive }) =>
-                isActive
-                  ? 'bg-secondary-400 flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2'
-                  : 'flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2'
-              }
+              className="flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2"
+              activeProps={{
+                className:
+                  'bg-secondary-400 flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2',
+              }}
             >
               <svg
                 width="24"
@@ -106,16 +106,16 @@ const SidebarNav = () => {
               {isSidebarOpen && (
                 <span className="text-sm font-semibold">إضافة العقود</span>
               )}
-            </NavLink>
+            </Link>
           </li>
           <li>
-            <NavLink
+            <Link
               to="/active-contracts"
-              className={({ isActive }) =>
-                isActive
-                  ? 'bg-secondary-400 flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2'
-                  : 'flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2'
-              }
+              className="flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2"
+              activeProps={{
+                className:
+                  'bg-secondary-400 flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2',
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -134,22 +134,22 @@ const SidebarNav = () => {
               {isSidebarOpen && (
                 <span className="text-sm font-semibold">العقود النشطة</span>
               )}
-            </NavLink>
+            </Link>
           </li>
           <li>
-            <NavLink
+            <Link
               to="/closed-contracts"
-              className={({ isActive }) =>
-                isActive
-                  ? 'bg-secondary-400 flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2'
-                  : 'flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2'
-              }
+              className="flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2"
+              activeProps={{
+                className:
+                  'bg-secondary-400 flex gap-3 items-center w-full h-full rounded-2xl px-2 py-2',
+              }}
             >
               <FileText className="w-6 h-6 text-white rotate-180" />
               {isSidebarOpen && (
                 <span className="text-sm font-semibold">العقود المغلقة</span>
               )}
-            </NavLink>
+            </Link>
           </li>
           <SidebarNavExpandableItem
             title="خدمات العقود"

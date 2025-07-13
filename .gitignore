@@ -25,3 +25,4 @@ dist-ssr
 *.toml
 *.vite
 vercel.json
+.tanstack

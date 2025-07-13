@@ -1,7 +1,7 @@
-import { NavLink, useLocation } from 'react-router';
 import { useState } from 'react';
 import { ChevronDownIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Link, useRouter } from '@tanstack/react-router';
 
 const SidebarNavExpandableItem = ({
   isSidebarOpen,
@@ -17,7 +17,7 @@ const SidebarNavExpandableItem = ({
       setIsListExpanded(!isListExpanded);
     }
   };
-  const { pathname } = useLocation();
+  const { state } = useRouter();
   return (
     <li
       tabIndex={1}
@@ -29,7 +29,7 @@ const SidebarNavExpandableItem = ({
         onClick={handleExpandList}
         className={`flex group-focus:bg-secondary-400 group-focus:text-white items-center px-2 py-2 cursor-pointer duration-300 rounded-2xl  ${
           !isSidebarOpen ? 'w-max' : ''
-        } ${pathname.includes(baseRoute) ? 'bg-secondary-400' : ''}`}
+        } ${state.location.pathname.includes(baseRoute) ? 'bg-secondary-400' : ''}`}
       >
         <div className="flex gap-3 items-center w-full h-full rounded-2xl">
           {icon}
@@ -58,7 +58,7 @@ const SidebarNavExpandableItem = ({
         >
           {routes.map((route) =>
             !route.beta ? (
-              <NavLink
+              <Link
                 key={route?.to}
                 to={route?.to}
                 className={({ isActive }) =>
@@ -66,12 +66,12 @@ const SidebarNavExpandableItem = ({
                     ? 'text-secondary-200 px-6 py-[10px] duration-300 text-xs select-none'
                     : cn(
                         'px-6 py-[10px] duration-300 hover:text-secondary-200 text-xs select-none',
-                        route?.className
+                        route?.className,
                       )
                 }
               >
                 {route?.title}
-              </NavLink>
+              </Link>
             ) : (
               <div
                 key={route?.to}
@@ -82,7 +82,7 @@ const SidebarNavExpandableItem = ({
                   قريبا
                 </span>
               </div>
-            )
+            ),
           )}
         </div>
       )}
