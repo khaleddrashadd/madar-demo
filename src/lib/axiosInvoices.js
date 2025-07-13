@@ -1,6 +1,6 @@
 // import { clearSuperAdminContext } from '@/layouts/store/useAdminContextStore';
 import { router } from '@/App';
-import { store } from '@/store/store';
+import useAdminContextStore from '@/layouts/store/useAdminContextStore';
 import axios from 'axios';
 
 const baseURL = import.meta.env.VITE_INVOICES_BASE_API_URL;
@@ -10,13 +10,7 @@ export const axiosInvoices = axios.create({
   baseURL,
 });
 
-let navigateRef;
 let queryClientRef; // Add this for query client reference
-
-// Function to set navigate reference
-export const setNavigateRef = (navigate) => {
-  navigateRef = navigate;
-};
 
 export const setQueryClientRef = (queryClient) => {
   queryClientRef = queryClient;
@@ -49,7 +43,8 @@ axiosInvoices.interceptors.response.use(
       }
 
       localStorage.clear();
-      // store.dispatch(clearSuperAdminContext());
+      useAdminContextStore.getState().clearAdminContext();
+
       router.navigate({
         to: '/login',
         replace: true,

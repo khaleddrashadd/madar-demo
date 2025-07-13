@@ -16,14 +16,23 @@ import PaymentStatus from '@/features/portfolioPerformance/components/PaymentSta
 import BucketRate from '@/features/portfolioPerformance/components/BucketRate';
 import BucketsTotalContracts from '@/features/portfolioPerformance/components/BucketsTotalContracts';
 import BucketsTotalContractsChart from '@/features/portfolioPerformance/components/Buckets/BucketsTotalContractsChart';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { homeData } from '@/features/portfolioPerformance/data/homeData';
 import { homeDataOnSelectedPortfolio } from '@/features/portfolioPerformance/data/homeDataOnSelectedPortfolio';
+import axiosInvoices from '@/lib/axiosInvoices';
 export default function Home() {
   const [selectedPortfolio, setSelectedPortfolio] = useState('');
 
   const data = !selectedPortfolio ? homeData : homeDataOnSelectedPortfolio;
   console.log(data);
+  useEffect(() => {
+    const a = async () => {
+      // Simulate fetching data
+      await axiosInvoices.get('/portfolioPerformance');
+      console.log('Data fetched');
+    };
+    a();
+  }, [selectedPortfolio]); // Re-run effect when selectedPortfolio changes
 
   return (
     <div className="p-4 space-y-4">

@@ -1,6 +1,6 @@
 // import { clearSuperAdminContext } from '@/layouts/store/useAdminContextStore';
 import { router } from '@/App';
-import { store } from '@/store/store';
+import useAdminContextStore from '@/layouts/store/useAdminContextStore';
 import axios from 'axios';
 
 const baseURL = import.meta.env.VITE_BASE_API_URL;
@@ -40,7 +40,7 @@ axiosPrivate.interceptors.response.use(
       }
 
       localStorage.clear();
-      // store.dispatch(clearSuperAdminContext());
+      useAdminContextStore.getState().clearAdminContext();
       router.navigate({
         to: '/login',
         replace: true,
