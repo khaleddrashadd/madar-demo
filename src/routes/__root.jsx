@@ -4,6 +4,7 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
 export const Route = createRootRoute({
   notFoundComponent: NotFound,
+
   component: () => {
     return (
       <>

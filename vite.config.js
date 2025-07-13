@@ -77,7 +77,6 @@ export default defineConfig({
             '@radix-ui/react-alert-dialog',
             // Add any other Radix UI components you're using
           ],
-          state: ['redux', 'redux-persist', '@reduxjs/toolkit'],
         },
       },
     },

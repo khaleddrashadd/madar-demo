@@ -1,11 +1,10 @@
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ToastContainer } from 'react-toastify';
-import { createRouter, RouterProvider } from '@tanstack/react-router';
-import { routeTree } from './routeTree.gen';
+import { RouterProvider } from '@tanstack/react-router';
 import { queryClient } from './lib/tanstack/query';
+import { router } from './lib/tanstack/router';
 
-export const router = createRouter({ routeTree });
 function App() {
   return (
     <QueryClientProvider client={queryClient}>

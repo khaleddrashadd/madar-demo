@@ -9,7 +9,8 @@
     "build:stage": "env-cmd -e stage vite build",
     "build:prod": "env-cmd -e production vite build",
     "lint": "eslint .",
-    "preview": "vite preview --port 5000"
+    "preview": "vite preview --port 5000",
+    "purge": "rm -rf dist && rm -rf .tanstack && rm -rf node_modules && bun i"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",

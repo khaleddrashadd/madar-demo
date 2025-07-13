@@ -1,5 +1,5 @@
 // import { clearSuperAdminContext } from '@/layouts/store/useAdminContextStore';
-import { router } from '@/App';
+import { router } from '@/lib/tanstack/router';
 import useAdminContextStore from '@/layouts/store/useAdminContextStore';
 import axios from 'axios';
 
