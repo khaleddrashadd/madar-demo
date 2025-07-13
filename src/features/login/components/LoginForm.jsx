@@ -8,15 +8,13 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import logo from '@/assets/images/logo.png';
 import { STEPS } from '@/constants/steps';
-import { useDispatch } from 'react-redux';
-import { setPhoneNumber, setUsername } from '../store/loginSlice';
+import useLoginStore from '../store/useLoginStore';
 import loginSchema from '../schema/loginSchema';
 import { FALLBACK_ERR_MSG } from '@/constants/fallbacks';
 
 const LoginForm = ({ setStep }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const dispatch = useDispatch();
-
+  const { setPhoneNumber, setUsername } = useLoginStore();
   const {
     register,
     handleSubmit,
@@ -36,8 +34,8 @@ const LoginForm = ({ setStep }) => {
   } = useMutation({
     mutationFn: onLogin,
     onSuccess({ data }, variables) {
-      dispatch(setUsername(variables.username));
-      dispatch(setPhoneNumber(data.data));
+      setUsername(variables.username);
+      setPhoneNumber(data.data);
     },
   });
   const onSubmit = (data) => mutate(data);

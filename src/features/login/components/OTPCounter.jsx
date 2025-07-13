@@ -1,7 +1,6 @@
 import { resendOtpService } from '../services/otpService';
 import { useMutation } from '@tanstack/react-query';
-import { getUsername } from '../store/loginSlice';
-import { useSelector } from 'react-redux';
+import useLoginStore from '../store/useLoginStore';
 import { FALLBACK_ERR_MSG } from '@/constants/fallbacks';
 import { toast } from 'react-toastify';
 import { CircleCheck } from 'lucide-react';
@@ -10,7 +9,8 @@ import useOTP from '../hooks/useOTP';
 const OTPCounter = () => {
   const { formattedTime, isExpired, resetTimer } = useOTP();
 
-  const username = useSelector(getUsername);
+  // const username = useSelector(getUsername);
+  const { username } = useLoginStore();
 
   const handleResend = async () => {
     return await resendOtpService(username);

@@ -1,17 +1,12 @@
 import { authorize } from '@/utils/authorize';
 import { Settings, UserRound } from 'lucide-react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  changeSuperAdminContext,
-  getAdminLegalOwner,
-} from './store/prevailageSlice';
+import useAdminContextStore from './store/useAdminContextStore';
 
 const HeaderAdminMenu = ({ isHeaderMenuVisible, onToggleMenu }) => {
-  const currentContext = useSelector(getAdminLegalOwner);
+  const { adminContext, changeAdminContext } = useAdminContextStore();
   const role = localStorage.getItem('legalOwner');
-  const dispatch = useDispatch();
-  const changeAdminContext = (ctx) => {
-    dispatch(changeSuperAdminContext(ctx));
+  const onChangeAdminContext = (ctx) => {
+    changeAdminContext(ctx);
     onToggleMenu(false);
   };
   return (
@@ -27,24 +22,24 @@ const HeaderAdminMenu = ({ isHeaderMenuVisible, onToggleMenu }) => {
           <div className="flex flex-col gap-y-2 pb-2 border-b border-ivory-300">
             <li
               className={`hover:bg-secondary-100 rounded-md ${
-                currentContext === 'REDF' ? 'bg-secondary-100' : ''
+                adminContext === 'REDF' ? 'bg-secondary-100' : ''
               }`}
             >
               <button
                 className="w-full text-start px-4 py-1"
-                onClick={() => changeAdminContext('REDF')}
+                onClick={() => onChangeAdminContext('REDF')}
               >
                 عرض كـ REDF
               </button>
             </li>
             <li
               className={`hover:bg-secondary-100 rounded-md ${
-                currentContext === 'SRC' ? 'bg-secondary-100' : ''
+                adminContext === 'SRC' ? 'bg-secondary-100' : ''
               }`}
             >
               <button
                 className="w-full text-start px-4 py-1"
-                onClick={() => changeAdminContext('SRC')}
+                onClick={() => onChangeAdminContext('SRC')}
               >
                 عرض كـ SRC
               </button>

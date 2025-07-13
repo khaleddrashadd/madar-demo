@@ -3,13 +3,12 @@ import { useState } from 'react';
 import LogoutModal from '@/features/login/LogoutModal';
 import { Bell, ChevronDownIcon, CircleArrowOutDownLeft } from 'lucide-react';
 import HeaderAdminMenu from './HeaderAdminMenu';
-import { useSelector } from 'react-redux';
-import { getAdminLegalOwner } from './store/prevailageSlice';
+import useAdminContextStore from './store/useAdminContextStore';
 import personPlaceholder from '@/assets/images/person-placeholder.png';
 
 const Header = () => {
   const [isLogoutModalVisible, setIsLogoutModalVisible] = useState(false);
-  const adminContext = useSelector(getAdminLegalOwner);
+  const { adminContext } = useAdminContextStore();
   const [isHeaderMenuVisible, setIsHeaderMenuVisible] = useState(false);
 
   const handleToggleHeaderMenu = () => setIsHeaderMenuVisible((prev) => !prev);

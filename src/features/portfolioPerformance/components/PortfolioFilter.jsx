@@ -7,19 +7,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  getSelectedMonth,
-  getSelectedYear,
-  selectMonth,
-  selectYear,
-} from '../store/filterSlice';
+import usePortfolioPerformanceFilterStore from '../store/usePortfolioPerformanceFilterStore';
 import { parseMonths, parseYears } from '@/utils/parseDate';
 
 const PortfolioFilter = ({ minDate }) => {
-  const dispatch = useDispatch();
-  const selectedYear = useSelector(getSelectedYear);
-  const selectedMonth = useSelector(getSelectedMonth);
+  const { selectMonth, selectYear, selectedMonth, selectedYear } =
+    usePortfolioPerformanceFilterStore();
 
   return (
     <div className="flex items-center gap-4 flex-col md:flex-row">
@@ -30,7 +23,7 @@ const PortfolioFilter = ({ minDate }) => {
           </SelectLabel>
           <Select
             value={selectedYear}
-            onValueChange={(value) => dispatch(selectYear(value))}
+            onValueChange={(value) => selectYear(value)}
           >
             <SelectTrigger className="w-48 bg-white">
               <SelectValue />
@@ -53,7 +46,7 @@ const PortfolioFilter = ({ minDate }) => {
           <Select
             disabled={!selectedYear.trim()}
             value={selectedMonth}
-            onValueChange={(value) => dispatch(selectMonth(value))}
+            onValueChange={(value) => selectMonth(value)}
           >
             <SelectTrigger className="w-48 bg-white">
               <SelectValue />

@@ -9,13 +9,7 @@ import { useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { useMutation } from '@tanstack/react-query';
 import TermsModal from './TermsModal';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  closeModal,
-  getHasConsent,
-  getIsFirstLogin,
-  getUsername,
-} from '../store/loginSlice';
+import useLoginStore from '../store/useLoginStore';
 import { changePasswordService } from '../services/changePasswordService';
 import passwordSchema from '../schema/passwordSchema';
 import { consentTermsService } from '../services/consentTermsService';
@@ -27,8 +21,7 @@ const ChangePasswordForm = ({ setStep }) => {
   const [hasChangedPassword, setHasChangedPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const dispatch = useDispatch();
-
+  const { closeModal, hasConsent, isFirstLogin, username } = useLoginStore();
   const {
     register,
     handleSubmit,
@@ -39,7 +32,6 @@ const ChangePasswordForm = ({ setStep }) => {
   });
 
   const password = watch('password', ''); // Watch password for live updates
-  const username = useSelector(getUsername);
 
   const onChangePassword = async (data) => {
     return await changePasswordService({ ...data, username });
@@ -57,9 +49,6 @@ const ChangePasswordForm = ({ setStep }) => {
   });
 
   const onSubmit = (data) => mutate(data);
-
-  const hasConsent = useSelector(getHasConsent);
-  const isFirstLogin = useSelector(getIsFirstLogin);
   const onConfirm = async () => await consentTermsService(username);
 
   const handleToast = () =>
@@ -71,7 +60,7 @@ const ChangePasswordForm = ({ setStep }) => {
   const { mutate: handleConfirmModal } = useMutation({
     mutationFn: onConfirm,
     onSuccess() {
-      dispatch(closeModal());
+      closeModal();
       setStep(STEPS.LOGIN);
       handleToast();
     },

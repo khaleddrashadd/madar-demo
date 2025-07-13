@@ -1,4 +1,5 @@
-import { clearSuperAdminContext } from '@/layouts/store/prevailageSlice';
+// import { clearSuperAdminContext } from '@/layouts/store/useAdminContextStore';
+import { router } from '@/App';
 import { store } from '@/store/store';
 import axios from 'axios';
 
@@ -9,13 +10,9 @@ export const axiosPrivate = axios.create({
   baseURL,
 });
 
-let navigateRef;
 let queryClientRef; // Add query client reference
 
-// Function to set navigate reference
-export const setNavigateRef = (navigate) => {
-  navigateRef = navigate;
-};
+// Function to set navigate refere
 export const setQueryClientRef = (queryClient) => {
   queryClientRef = queryClient;
 };
@@ -29,7 +26,7 @@ axiosPrivate.interceptors.request.use(
     }
     return config;
   },
-  (err) => Promise.reject(err)
+  (err) => Promise.reject(err),
 );
 
 // Response interceptor
@@ -43,14 +40,15 @@ axiosPrivate.interceptors.response.use(
       }
 
       localStorage.clear();
-      store.dispatch(clearSuperAdminContext());
-      navigateRef('/login', {
+      // store.dispatch(clearSuperAdminContext());
+      router.navigate({
+        to: '/login',
         replace: true,
-        state: { from: originalPath },
+        search: { from: originalPath },
       });
     }
     return Promise.reject(err);
-  }
+  },
 );
 
 export default axiosPrivate;

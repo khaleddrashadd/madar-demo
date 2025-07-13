@@ -1,8 +1,4 @@
-import loginReducer from '@/features/login/store/loginSlice';
-import filterReducer from '@/features/portfolioPerformance/store/filterSlice';
-
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import prevailageReducer from '@/layouts/store/prevailageSlice';
 import { persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
@@ -23,13 +19,7 @@ const persistConfig = {
   whitelist: reducersToPersist,
 };
 
-const rootReducer = combineReducers({
-  filter: filterReducer,
-
-  loginState: loginReducer,
-
-  prevailage: prevailageReducer,
-});
+const rootReducer = combineReducers({});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

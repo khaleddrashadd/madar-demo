@@ -6,16 +6,7 @@ import OTPCounter from './OTPCounter';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from '@tanstack/react-query';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  closeModal,
-  getHasConsent,
-  getIsFirstLogin,
-  getPhoneNumber,
-  getUsername,
-  setHasConsent,
-  setIsFirstLogin,
-} from '../store/loginSlice';
+import useLoginStore from '../store/useLoginStore';
 import otpSchema from '../schema/otpSchema';
 import { otpService } from '../services/otpService';
 import TermsModal from './TermsModal';
@@ -24,15 +15,18 @@ import OTP from './OTP';
 import { consentTermsService } from '../services/consentTermsService';
 import { FALLBACK_ERR_MSG } from '@/constants/fallbacks';
 import { ADMINS } from '@/constants/globalConstants';
-import { changeSuperAdminContext } from '@/layouts/store/prevailageSlice';
-import { useNavigate, useSearch } from '@tanstack/react-router';
+// import { changeSuperAdminContext } from '@/layouts/store/useAdminContextStore';
+import { useNavigate, useRouter, useSearch } from '@tanstack/react-router';
 
 const OTPForm = ({ setStep }) => {
-  const phoneNumber = useSelector(getPhoneNumber);
+  const { closeModal, hasConsent, isFirstLogin, username, phoneNumber } =
+    useLoginStore();
+
   const [hasSentOtp, setHasSentOtp] = useState(false);
   const navigate = useNavigate();
-  const search = useSearch();
-  const from = search?.from || '/';
+  const router = useRouter();
+  console.log('Available routes:', router.routeTree.children); // Check console for route IDs
+  const search = useSearch({ from: '/(auth)/login' }) || '/';
 
   const {
     control,
@@ -41,9 +35,6 @@ const OTPForm = ({ setStep }) => {
   } = useForm({
     resolver: yupResolver(otpSchema),
   });
-
-  const username = useSelector(getUsername);
-  const dispatch = useDispatch();
 
   const onCheckOtp = async (data) => {
     localStorage.setItem('token', 'abc');
@@ -57,8 +48,8 @@ const OTPForm = ({ setStep }) => {
   } = useMutation({
     mutationFn: onCheckOtp,
     // onSuccess({ data }) {
-    //   dispatch(setIsFirstLogin(data.data.initailLogin));
-    //   dispatch(setHasConsent(data.data.consentTerms));
+    //setIsFirstLogin(data.data.initailLogin);
+    //setHasConsent(data.data.consentTerms);
     //   if (data.data.initailLogin) {
     //     setStep(STEPS.CHANGE_PASSWORD);
     //     return;
@@ -84,8 +75,6 @@ const OTPForm = ({ setStep }) => {
   });
 
   const onSubmit = (data) => mutate(data);
-  const hasConsent = useSelector(getHasConsent);
-  const isFirstLogin = useSelector(getIsFirstLogin);
 
   const onConfirm = async () => await consentTermsService(username);
 
@@ -98,12 +87,13 @@ const OTPForm = ({ setStep }) => {
         data.data?.roles?.[0]?.replace('Admin-', ''),
       );
 
-      dispatch(
-        changeSuperAdminContext(
-          ADMINS[data.data?.roles?.[0]?.replace('Admin-', '')],
-        ),
-      );
-      dispatch(closeModal());
+      // dispatch(
+      //   changeSuperAdminContext(
+      //     ADMINS[data.data?.roles?.[0]?.replace('Admin-', '')],
+      //   ),
+      // );
+      closeModal();
+
       navigate({ to: '/', replace: true });
     },
   });

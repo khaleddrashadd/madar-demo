@@ -1,4 +1,5 @@
-import { clearSuperAdminContext } from '@/layouts/store/prevailageSlice';
+// import { clearSuperAdminContext } from '@/layouts/store/useAdminContextStore';
+import { router } from '@/App';
 import { store } from '@/store/store';
 import axios from 'axios';
 
@@ -33,7 +34,7 @@ axiosInvoices.interceptors.request.use(
     }
     return config;
   },
-  (err) => Promise.reject(err)
+  (err) => Promise.reject(err),
 );
 
 // Response interceptor
@@ -48,14 +49,15 @@ axiosInvoices.interceptors.response.use(
       }
 
       localStorage.clear();
-      store.dispatch(clearSuperAdminContext());
-      navigateRef('/login', {
+      // store.dispatch(clearSuperAdminContext());
+      router.navigate({
+        to: '/login',
         replace: true,
-        state: { from: originalPath },
+        search: { from: originalPath },
       });
     }
     return Promise.reject(err);
-  }
+  },
 );
 
 export default axiosInvoices;

@@ -1,8 +1,12 @@
+import { useRouter } from '@tanstack/react-router';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router';
 
 const useResetOnUnmount = (cb) => {
-  const { pathname } = useLocation();
+  const {
+    state: {
+      location: { pathname },
+    },
+  } = useRouter();
   useEffect(() => {
     return () => {
       cb();
